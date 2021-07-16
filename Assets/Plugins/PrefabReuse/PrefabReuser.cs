@@ -41,9 +41,13 @@ public class PrefabReuser : MonoBehaviour
     private void SetupGameObject<T>(GameObject go, Vector3 position, System.Object data, Action<T> completion) where T : PrefabReuserItem
     {
         // D.Log("SetupGameObject", position);
-        go.transform.parent = ShowParent != null ? ShowParent : transform;
-        go.transform.position = position;
+        go.transform.SetParent(ShowParent != null ? ShowParent : transform);
         go.SetActive(true);
+
+        go.transform.localRotation = Quaternion.identity;
+        go.transform.localScale = Vector3.one;
+        go.transform.localPosition = position;
+
         _runningItems.Add(go);
 
         var comp = go.GetComponent<T>();
@@ -59,7 +63,7 @@ public class PrefabReuser : MonoBehaviour
     {
         GameObject pgo = _itemPool.Count > 0 ? _itemPool.Dequeue() : null;
 
-        if (pgo)
+        if (pgo != null)
         {
             SetupGameObject(pgo, position, data, completion);
             return;

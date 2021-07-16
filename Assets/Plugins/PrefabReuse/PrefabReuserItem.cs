@@ -11,7 +11,7 @@ public class PrefabReuserItem : MonoBehaviour
 
     }
 
-    private PrefabReuser parentReuser = null;
+    protected PrefabReuser parentReuser = null;
     public virtual void OnReuse(PrefabReuser parent)
     {
         parentReuser = parent;

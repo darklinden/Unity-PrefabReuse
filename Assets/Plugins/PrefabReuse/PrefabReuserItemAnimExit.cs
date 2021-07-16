@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PrefabReuserItemAnimExit : StateMachineBehaviour
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    [SerializeField] private int TryCount = 3;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Transform trans = animator.gameObject.transform;
         PrefabReuserItem item = trans.GetComponent<PrefabReuserItem>();
-        int tryCount = 3;
+        int tryCount = TryCount;
         while (item == null && trans.parent != null && tryCount > 0)
         {
             trans = trans.parent;
